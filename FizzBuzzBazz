@@ -1,0 +1,74 @@
+import time
+numberOne = None
+numberTwo = None
+def GetNumbers():
+    global numberOne
+    global numberTwo
+    if(numberOne == None):
+        testnum = (input("Enter number one: "))
+        if(testnum.isnumeric()):
+            numberOne = int(testnum)
+    if(numberOne != None):
+        testnum = (input("Enter number two: "))
+        if(testnum.isnumeric()):
+            numberTwo = int(testnum)
+        else:
+            print("Please enter a number!")
+            GetNumbers()
+    else:
+        print("Please enter a number!")
+        GetNumbers()
+
+GetNumbers()
+if(numberOne > numberTwo):
+    placeHolderNumber = numberTwo
+    numberTwo = numberOne
+    numberOne = placeHolderNumber
+
+numbers = 0
+numThirty = 0
+numFive = 0
+numThree = 0
+numTwo = 0
+numThreeAndTwo = 0
+numNone = 0
+start = time.time()
+for i in range(numberOne, numberTwo): #By default range doesn't include the last number
+    #Cause it said to omit it.
+    if ((numberOne == 0 or numberTwo == 0) and i == 0):
+        continue
+    if i % 30 == 0:
+        print("Foo")
+        numThirty += 1
+    if i % 5 == 0:
+        print("Bar")
+        numFive += 1
+    if i % 3 == 0:
+        if i % 2 == 0:
+            print("FizzBuzz")
+            numThreeAndTwo += 1
+    if i % 2 == 0:
+        print("Buzz")
+        numTwo += 1
+    if i % 3 == 0:
+        print("Fizz")
+        numThree += 1
+    else:
+        if(i % 3 != 0 and i % 30 != 0 and i % 5 != 0 and i % 2 != 0):
+            print("Bazz")
+            numNone += 1
+    numbers+= 1
+    print(i)
+print("The total numbers evaluated was "+str(numbers)+".")
+print("There were", numThirty ,"numbers that are divisible by 30.")
+print("There were", numFive ,"numbers that are divisible by 5.")
+print("There were", numThree ,"numbers that are divisible by 3.")
+print("There were", numTwo ,"numbers that are divisible by 2.")
+print("There were", numThreeAndTwo ,"numbers that are divisible by both 3 and 2.")
+print("There were", numNone ,"numbers that didn't meet any of the requirements above.")
+end = time.time()
+
+print(f"Runtime of the program is {str(round(end-start,2))} Seconds.")
+numberOne = None
+numberTwo = None
+GetNumbers()
